@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { AccountComponent } from './components/account/account.component';
 import { AccountService } from './services/account.service';
+import { KeepsService } from './services/keeps.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { AccountService } from './services/account.service';
       { path: 'account', component: AccountComponent }
     ])
   ],
-  providers: [AccountService],
+  providers: [AccountService, KeepsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

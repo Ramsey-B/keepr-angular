@@ -65,7 +65,7 @@ namespace keepr_angular.Repository
       SELECT * FROM tags
       INNER JOIN keeps ON keeps.id = tags.keepId 
       WHERE tagName LIKE CONCAT('%',@tag,'%')
-      AND keeps.public = true;
+      AND keeps.publicPrivate = true;
       ", new { tag });
       return check;
     }
@@ -76,7 +76,7 @@ namespace keepr_angular.Repository
         SELECT * FROM tags
         INNER JOIN keeps ON keeps.id = tags.keepId
         WHERE tagName LIKE CONCAT('%',@query,'%')
-        AND keeps.public = true;
+        AND keeps.publicPrivate = true;
       ", new { query });
     }
   }

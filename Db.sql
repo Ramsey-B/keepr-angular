@@ -25,18 +25,13 @@
 --   img VARCHAR(255) NOT NULL,
 --   author VARCHAR(20) NOT NULL,
 --   authorId VARCHAR(255) NOT NULL,
---   vaultId int NOT NULL,
 --   views int NOT NULL,
 --   keeps int NOT NULL,
---   public BOOLEAN NOT NULL,
+--   publicPrivate BOOLEAN NOT NULL,
 --   PRIMARY KEY (id),
 
 --   FOREIGN KEY (authorId)
 --     REFERENCES users(id)
---     ON DELETE CASCADE,
-  
---   FOREIGN KEY (vaultId)
---     REFERENCES vaults(id)
 --     ON DELETE CASCADE
 -- );
 

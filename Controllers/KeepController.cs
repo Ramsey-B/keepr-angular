@@ -34,10 +34,12 @@ namespace keepr_angular.Controllers
       return _db.GetByAuthorId(id);
     }
 
-    [HttpPost("{id}")]
+    [HttpPost]
     [Authorize]
-    public Keep CreateKeep(int id, [FromBody]Keep newKeep)
+    public Keep CreateKeep([FromBody]Keep newKeep)
     {
+      newKeep.Keeps = 0;
+      newKeep.Views = 0;
       newKeep.AuthorId = HttpContext.User.Identity.Name;
       if (ModelState.IsValid)
       {

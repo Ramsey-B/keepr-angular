@@ -21,12 +21,7 @@ namespace keepr_angular.Controllers
       return _db.GetByVaultId(vaultId);
     }
 
-    [HttpGet("{id}")]
-    public Keep GetById(int id)
-    {
-      return _db.GetById(id);
-    }
-
+    
     [HttpGet("user/{id}")]
     [Authorize]
     public IEnumerable<Keep> GetByAuthorId(string id)

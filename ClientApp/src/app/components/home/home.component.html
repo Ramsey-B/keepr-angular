@@ -1,3 +1,9 @@
-<p>
-  home works!
-</p>
+<div class="row">
+  <div class="col-md-3" *ngFor="let keep of keeps">
+    <div class="card text-center">
+      <img class="keep-img" src={{keep.img}}>
+      <h4 class="card-title">{{keep.description}}</h4>
+      <p class="card-text">{{keep.author}}</p>
+    </div>
+  </div>
+</div>

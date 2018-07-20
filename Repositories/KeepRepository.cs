@@ -15,15 +15,25 @@ namespace keepr_angular.Repository
 
     public IEnumerable<Keep> GetAll()
     {
-      return _db.Query<Keep>("SELECT * FROM keeps WHERE public = true;");
+      return _db.Query<Keep>("SELECT * FROM keeps WHERE publicPrivate = true;");
     }
 
-    public Keep GetById(int id) 
+    public Keep GetById(int id)
     {
-      return _db.ExecuteScalar<Keep>("SELECT * WHERE id = @id", new { id });
+      var i = _db.Execute(@"
+                UPDATE keeps SET
+                  views = views + 1
+                WHERE id = @id;
+            ", new { id });
+      if (i < 1)
+      {
+        return null;
+      }
+      return _db.QueryFirstOrDefault<Keep>(@"SELECT * FROM keeps
+              WHERE (keeps.id = @id);", new { id });
     }
 
-    public IEnumerable<Keep> GetByAuthorId(string authorId) 
+    public IEnumerable<Keep> GetByAuthorId(string authorId)
     {
       return _db.Query<Keep>("SELECT * WHERE authorId = @authorId", new { authorId });
     }
@@ -31,8 +41,8 @@ namespace keepr_angular.Repository
     public Keep CreateKeep(Keep newKeep)
     {
       int id = _db.ExecuteScalar<int>(@"
-                INSERT INTO keeps (description, img, author, vaultId, views, public, keeps)
-                VALUES (@Description, @Img, @Author, @VaultId, @Views, @Public, @Keeps);
+                INSERT INTO keeps (description, img, author, authorId, views, publicPrivate, keeps)
+                VALUES (@Description, @Img, @Author, @AuthorId, @Views, @PublicPrivate, @Keeps);
                 SELECT LAST_INSERT_ID();
             ", newKeep);
       return newKeep;
@@ -46,7 +56,7 @@ namespace keepr_angular.Repository
                 UPDATE keeps SET
                   description = @Description,
                   img = @Img,
-                  public = @Public
+                  publicPrivate = @PublicPrivate
                 WHERE id = @Id
                 AND authorId = @AuthorId;
             ", editKeep);

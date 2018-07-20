@@ -13,21 +13,6 @@ namespace keepr_angular.Repository
 
     }
 
-    public Keep GetById(int id)
-    {
-      var i = _db.Execute(@"
-                UPDATE keeps SET
-                  views = views + 1
-                WHERE id = @id;
-            ", new { id });
-      if (i < 1)
-      {
-        return null;
-      }
-      return _db.QueryFirstOrDefault<Keep>(@"SELECT * FROM keeps
-              WHERE (keeps.id = @id);", new { id });
-    }
-
     public IEnumerable<Keep> GetByAuthorId(string id)
     {
       return _db.Query<Keep>(@"SELECT * FROM shares
