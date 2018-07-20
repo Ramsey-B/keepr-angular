@@ -13,12 +13,11 @@ export class AccountComponent implements OnInit {
     username: "",
     password: ""
   }
-  currentUser: User
 
   constructor(private _accountService:AccountService) { }
 
   ngOnInit() {
-    this._accountService.authenticate()
+    
   }
 
   createUser() {

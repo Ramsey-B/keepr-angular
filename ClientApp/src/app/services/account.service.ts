@@ -8,7 +8,7 @@ import { BehaviorSubject } from "rxjs";
 @Injectable()
 export class AccountService {
 
-  private baseUrl = "//localhost:5000/api/account";
+  private baseUrl = "//localhost:5001/api/account/";
   HttpOptions = {
     withCredentials: true,
     timeout: 3000
@@ -20,10 +20,10 @@ export class AccountService {
   constructor(private http: Http, private _router:Router) { }
 
   authenticate() {
-    this.http.get(this.baseUrl + "/authenticate", this.HttpOptions)
+    this.http.get(this.baseUrl + "authenticate", this.HttpOptions)
       .pipe(map(res => res.json())).subscribe(u => {
         if (u != null) {
-          this.user = u;
+          this.user.next(u);
           this._router.navigate(['/']);
         } else {
           this._router.navigate(['account']);
@@ -32,17 +32,35 @@ export class AccountService {
   }
 
   registerUser(newUser:Object){
-    this.http.post(this.baseUrl + '/register', newUser, this.HttpOptions)
+    this.http.post(this.baseUrl + 'register', newUser, this.HttpOptions)
       .pipe(map(res => res.json())).subscribe(user => {
-        this.user = user;
+        if (user != null) {
+          this.user.next(user);
+          this._router.navigate(['/']);
+        } else {
+          this._router.navigate(['account']);
+          console.log("failed to login!")
+        }
       })
   }
 
   loginUser(user:Object){
-    this.http.post(this.baseUrl + '/login', user, this.HttpOptions)
+    this.http.post(this.baseUrl + 'login', user, this.HttpOptions)
       .pipe(map(res => res.json())).subscribe(u => {
-        debugger
-        this.user = u;
+        if (u != null) {
+          this.user.next(u);
+          this._router.navigate(['/']);
+        } else {
+          this._router.navigate(['account']);
+          console.log("failed to login!")
+        }
+      })
+  }
+
+  signOut(id:string) {
+    this.http.delete(this.baseUrl + id, this.HttpOptions)
+      .pipe(map(res => res.json())).subscribe(user => {
+        this.user.next(null);
       })
   }
 }
