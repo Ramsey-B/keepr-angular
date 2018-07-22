@@ -18,6 +18,7 @@ import { VaultsService } from './services/vaults.service';
 import { KeepsComponent } from './components/keeps/keeps.component';
 import { VaultComponent } from './components/vault/vault.component';
 import { ShareService } from './services/share.service';
+import { TagService } from './services/tag.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { ShareService } from './services/share.service';
       { path: 'keeps', component: KeepsComponent}
     ])
   ],
-  providers: [AccountService, KeepsService, VaultsService, ShareService],
+  providers: [AccountService, KeepsService, VaultsService, ShareService, TagService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

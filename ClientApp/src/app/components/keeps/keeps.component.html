@@ -18,11 +18,11 @@
                 <input class="input" type="text" name="description" placeholder="Description" id="description" [(ngModel)]="newKeep.description">
                 <div class="mt-3">
                   <div class="d-flex flex-row">
-                    <span *ngFor="let tag of tags; let i = index" class="ml-3">{{tag.tagName}}
+                    <span *ngFor="let t of tags; let i = index" class="ml-3">{{t.tagName}}
                       <a (click)="removeTag(i)" class="remove-tag">X</a>
                     </span>
                   </div>
-                  <form (ngSubmit)="addTag">
+                  <form (ngSubmit)="addTag()">
                     <input type="text" placeholder="Add Tag" name="tag" [(ngModel)]="tag.tagName" required>
                     <button type="submit" class="btn btn-primary btn-primary">Add Tag</button>
                   </form>

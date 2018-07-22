@@ -45,6 +45,7 @@ namespace keepr_angular.Repository
                 VALUES (@Description, @Img, @Author, @AuthorId, @Views, @PublicPrivate, @Keeps);
                 SELECT LAST_INSERT_ID();
             ", newKeep);
+      newKeep.Id = id;
       return newKeep;
     }
 

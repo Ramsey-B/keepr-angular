@@ -14,13 +14,23 @@ import { Tag } from '../../models/Tag';
 export class KeepsComponent implements OnInit {
   private user: User
   private keeps: Keep[]
-  tags: Tag[]
+  tags = []
   tag = {
-    tagName: ''
+    tagName: '',
+    id: 0,
+    keepId: 0,
+    authorId: ''
   }
   newKeep = {
     img: '',
-    description: ''
+    description: '',
+    tags: [],
+    authorId: '',
+    author: '',
+    id: 0,
+    views: 0,
+    keeps: 0,
+    publicPrivate: false
   }
 
   constructor(private _keepsService: KeepsService, private _accountService: AccountService, private _router: Router) { }
@@ -42,14 +52,23 @@ export class KeepsComponent implements OnInit {
   }
 
   createKeep() {
-    this._keepsService.createKeep(this.newKeep)
+    this.newKeep.authorId = this.user.id
+    this.newKeep.author = this.user.username;
+    this._keepsService.createKeep(this.newKeep, this.tags)
   }
 
   addTag() {
-
+    var newTag = {
+      tagName: this.tag.tagName,
+      id: 0,
+      keepId: 0,
+      authorId: this.user.id
+    }
+    this.tags.unshift(newTag)
+    this.tag.tagName = ''
   }
 
   removeTag(i) {
-
+    this.tags.splice(i, 1);
   }
 }
