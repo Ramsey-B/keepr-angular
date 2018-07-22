@@ -1,3 +1,21 @@
 .fade {
   opacity: 0.8;
 }
+
+.vault {
+  margin: 2vh;
+  box-shadow: 5px 5px 5px #666;
+}
+
+.vault:hover {
+  background-color: rgb(92, 62, 62);
+  color: white;
+}
+
+.vault:active {
+  background-color: white;
+  color: black;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+

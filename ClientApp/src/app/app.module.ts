@@ -15,6 +15,9 @@ import { AccountService } from './services/account.service';
 import { KeepsService } from './services/keeps.service';
 import { VaultsComponent } from './components/vaults/vaults.component';
 import { VaultsService } from './services/vaults.service';
+import { KeepsComponent } from './components/keeps/keeps.component';
+import { VaultComponent } from './components/vault/vault.component';
+import { ShareService } from './services/share.service';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,8 @@ import { VaultsService } from './services/vaults.service';
     NavMenuComponent,
     AccountComponent,
     VaultsComponent,
+    KeepsComponent,
+    VaultComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,10 +37,12 @@ import { VaultsService } from './services/vaults.service';
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'account', component: AccountComponent },
-      { path: 'vaults', component: VaultsComponent }
+      { path: 'vaults', component: VaultsComponent },
+      { path: 'vault/:vaultId', component: VaultComponent},
+      { path: 'keeps', component: KeepsComponent}
     ])
   ],
-  providers: [AccountService, KeepsService, VaultsService],
+  providers: [AccountService, KeepsService, VaultsService, ShareService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

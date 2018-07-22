@@ -4,6 +4,7 @@ import { Vault } from '../../models/Vault';
 import { AccountService } from '../../services/account.service';
 import { User } from '../../models/User';
 import { Router } from '@angular/router';
+import { ShareService } from '../../services/share.service';
 
 @Component({
   selector: 'app-vaults',
@@ -18,7 +19,7 @@ export class VaultsComponent implements OnInit {
     title: ""
   }
 
-  constructor(private _vaultService: VaultsService, private _accountService: AccountService, private _router: Router) { }
+  constructor(private _vaultService: VaultsService, private _accountService: AccountService, private _router: Router, private _shareService:ShareService) { }
 
   ngOnInit() {
     this._accountService.castUser.subscribe(user => {
@@ -39,6 +40,10 @@ export class VaultsComponent implements OnInit {
   }
 
   createVault() {
-    this._vaultService.createVault(this.vault);
+    var newVault = this.vault;
+    this._vaultService.createVault(newVault);
+    this.vault = {
+      title: ""
+    }
   }
 }

@@ -1,8 +1,11 @@
-<div class="container-fluid">
+<div class="container-fluid nav-bar">
   <div class="row">
     <div class="col-md-8">
-      <a [routerLink]="['']"><h2>Home</h2></a>
-      <a [routerLink]="['vaults']">Vaults</a>
+      <div class="d-flex flex-row align-items-end">
+        <a class="nav-link" [routerLink]="['']"><h2>Home</h2></a>
+        <a class="nav-link" [routerLink]="['vaults']"><h4>Vaults</h4></a>
+        <a class="nav-link" [routerLink]="['keeps']"><h4>Keeps</h4></a>
+      </div>
     </div>
     <div class="col-md-4">
       <button *ngIf="user == null" class="btn btn-success" [routerLink]="['account']">Login/Register</button>

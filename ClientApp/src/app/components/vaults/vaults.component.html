@@ -1,31 +1,34 @@
-<div>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-    Create Vault
-  </button>
-
-  <!-- Modal -->
-  <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Create Vault</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form (ngSubmit)="createVault()">
-            <input class="input" type="text" name="title" placeholder="Title" id="title" [(ngModel)]="vault.title">
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          <button class="btn btn-primary btn-primary" (click)="createVault()" data-dismiss="modal">Submit</button>
+<div class="row">
+  <div class="col-12">
+    <div>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createVault">Create Vault</button>
+      <!-- Modal -->
+      <div class="modal" id="createVault" tabindex="-1" role="dialog" aria-labelledby="createVaultTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="createVaultLongTitle">Create Vault</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form (ngSubmit)="createVault()">
+                <input class="input" type="text" name="title" placeholder="Title" id="title" [(ngModel)]="vault.title" required>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button class="btn btn-primary btn-primary" *ngIf="vault.title.length > 0" (click)="createVault()" data-dismiss="modal">Submit</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div *ngFor="let vault of vaults">
-  {{vault.title}}
+<div class="row d-flex justify-content-center">
+  <div class="col-5 card vault" *ngFor="let vault of vaults" [routerLink]="['../', 'vault', vault.id]">
+    <h2>{{vault.title}}</h2>
+  </div>
 </div>
