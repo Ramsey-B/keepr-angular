@@ -14,7 +14,7 @@ export class VaultsService {
     timeout: 3000
   };
 
-  private vaults = new BehaviorSubject<Vault>(null);
+  private vaults = new BehaviorSubject<Vault[]>(null);
   castVaults = this.vaults.asObservable();
 
   constructor(private http:Http, private _accountService:AccountService) {}
@@ -22,8 +22,14 @@ export class VaultsService {
   getVaults(id) {
     return this.http.get(this.baseUrl + 'user/' + id, this.HttpOptions)
     .pipe(map(res => res.json())).subscribe(vaults => {
-      debugger
       this.vaults.next(vaults);
     })
+  }
+
+  createVault(vault) {
+    this.http.post(this.baseUrl, vault, this.HttpOptions)
+      .pipe(map(res => res.json())).subscribe(vault => {
+        this.vaults.value.unshift(vault);
+      })
   }
 }

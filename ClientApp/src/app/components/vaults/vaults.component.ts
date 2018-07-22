@@ -12,8 +12,11 @@ import { Router } from '@angular/router';
 })
 export class VaultsComponent implements OnInit {
 
-  private vaults: Vault;
+  private vaults: Vault[];
   private user: User;
+  vault = {
+    title: ""
+  }
 
   constructor(private _vaultService: VaultsService, private _accountService: AccountService, private _router: Router) { }
 
@@ -33,5 +36,9 @@ export class VaultsComponent implements OnInit {
         }
       })
     }
+  }
+
+  createVault() {
+    this._vaultService.createVault(this.vault);
   }
 }
