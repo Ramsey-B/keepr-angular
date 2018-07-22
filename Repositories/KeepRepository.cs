@@ -35,7 +35,7 @@ namespace keepr_angular.Repository
 
     public IEnumerable<Keep> GetByAuthorId(string authorId)
     {
-      return _db.Query<Keep>("SELECT * WHERE authorId = @authorId", new { authorId });
+      return _db.Query<Keep>("SELECT * FROM keeps WHERE authorId = @authorId", new { authorId });
     }
 
     public Keep CreateKeep(Keep newKeep)

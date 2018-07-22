@@ -8,7 +8,7 @@ import { Keep } from '../../models/Keep';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  private keeps: Keep;
+  private keeps: Keep[];
 
   constructor(private _keepsService:KeepsService) { }
 
