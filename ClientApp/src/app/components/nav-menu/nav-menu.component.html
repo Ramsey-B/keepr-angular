@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-md-8">
       <a [routerLink]="['']"><h2>Home</h2></a>
+      <a [routerLink]="['vaults']">Vaults</a>
     </div>
     <div class="col-md-4">
       <button *ngIf="user == null" class="btn btn-success" [routerLink]="['account']">Login/Register</button>

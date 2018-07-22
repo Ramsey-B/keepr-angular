@@ -1,3 +1,8 @@
 .keep-img {
-  max-height: 30vh;
+  width: 100%
+}
+
+.keep-card {
+  margin: auto;
+  width: 25%;
 }

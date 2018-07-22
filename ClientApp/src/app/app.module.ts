@@ -13,6 +13,8 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { AccountComponent } from './components/account/account.component';
 import { AccountService } from './services/account.service';
 import { KeepsService } from './services/keeps.service';
+import { VaultsComponent } from './components/vaults/vaults.component';
+import { VaultsService } from './services/vaults.service';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { KeepsService } from './services/keeps.service';
     HomeComponent,
     NavMenuComponent,
     AccountComponent,
+    VaultsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,10 +31,11 @@ import { KeepsService } from './services/keeps.service';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
-      { path: 'account', component: AccountComponent }
+      { path: 'account', component: AccountComponent },
+      { path: 'vaults', component: VaultsComponent }
     ])
   ],
-  providers: [AccountService, KeepsService],
+  providers: [AccountService, KeepsService, VaultsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
